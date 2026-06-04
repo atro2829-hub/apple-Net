@@ -17,6 +17,7 @@ import { normalizeCode } from "@/lib/utils";
 import type { CreditHistory, SubscriptionPlan, UserSubscription, NetworkItem, CardItem } from "@/lib/types";
 import type { User } from "firebase/auth";
 import { toast } from "sonner";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface CreditPageProps {
   user: User | null;
@@ -39,6 +40,8 @@ function getTypeConfig(type: string) {
 }
 
 export function CreditPage({ user, onAuthClick, onNavigate }: CreditPageProps) {
+  const { t, isRTL } = useLanguage();
+
   const [balance, setBalance] = useState(0);
   const [history, setHistory] = useState<CreditHistory[]>([]);
   const [showRedeem, setShowRedeem] = useState(false);

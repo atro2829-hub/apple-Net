@@ -14,6 +14,7 @@ import { normalizeCode, sanitizeInput } from "@/lib/utils";
 import { NetworkDetailModal } from "@/components/NetworkDetailModal";
 import type { CardItem, NetworkItem, TierItem, CommissionSetting } from "@/lib/types";
 import type { User } from "firebase/auth";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface CardsPageProps {
   user: User | null;
@@ -50,6 +51,8 @@ const CARD_STATUS_CONFIG: Record<string, { label: string; color: string }> = {
 };
 
 export function CardsPage({ user, onAuthClick }: CardsPageProps) {
+  const { t, isRTL } = useLanguage();
+
   const [cards, setCards] = useState<CardItem[]>([]);
   const [selectedProvince, setSelectedProvince] = useState<string | null>(null);
   const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);

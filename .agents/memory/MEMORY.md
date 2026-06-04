@@ -1,1 +1,2 @@
 - [Apple.NET stack](apple-net-stack.md) — Next.js 15 PWA on port 23304, Firebase hardcoded config, SQLite+Prisma, Tailwind v4, dark mode via next-themes `class` strategy
+- [Apple.NET i18n + dark mode](apple-net-i18n-dark.md) — useLanguage hook from LanguageContext; dark mode via globals.css CSS overrides (.dark .bg-white etc.) + explicit dark: classes on full-screen containers; NetworkItem cast needs `as unknown as Record<string, unknown>` pattern.

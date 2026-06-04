@@ -20,6 +20,7 @@ import { AppleNetLogo } from "./AppleNetLogo";
 import { iOSSpring, formatDate, generateWhatsAppLink, ADMIN_WHATSAPP } from "@/lib/constants";
 import type { AppUser, SubscriptionPlan, UserSubscription } from "@/lib/types";
 import type { User } from "firebase/auth";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface MorePageProps {
   user: User | null;
@@ -29,6 +30,8 @@ interface MorePageProps {
 }
 
 export function MorePage({ user, isAdmin, onAuthClick, onNavigate }: MorePageProps) {
+  const { t, isRTL } = useLanguage();
+
   const [userInfo, setUserInfo] = useState<AppUser | null>(null);
   const [showAbout, setShowAbout] = useState(false);
   const [showSubscriptions, setShowSubscriptions] = useState(false);

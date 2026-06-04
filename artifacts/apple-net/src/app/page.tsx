@@ -457,45 +457,45 @@ export default function AppleNetApp() {
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: 288, opacity: 0 }}
               transition={iOSSpring.gentle}
-              className="fixed top-0 right-0 bottom-0 w-[288px] bg-white z-[101] shadow-2xl"
+              className="fixed top-0 right-0 bottom-0 w-[288px] bg-white dark:bg-slate-900 z-[101] shadow-2xl border-l border-gray-100 dark:border-slate-700/50"
             >
               <div className="p-5">
                 {/* Menu Header */}
                 <div className="flex items-center justify-between mb-5">
-                  <div className="w-12 h-12 rounded-2xl overflow-hidden border-2 border-[#E8F5E9]">
+                  <div className="w-12 h-12 rounded-2xl overflow-hidden border-2 border-[#E8F5E9] dark:border-green-900/30">
                     <img src="/images/IMG_20260527_220851.jpg" alt="Apple.NET" className="w-full h-full object-cover" />
                   </div>
-                  <button onClick={() => setShowMenu(false)} className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
-                    <X className="w-4 h-4 text-gray-400" />
+                  <button onClick={() => setShowMenu(false)} className="w-8 h-8 rounded-full bg-gray-100 dark:bg-slate-700 flex items-center justify-center">
+                    <X className="w-4 h-4 text-gray-400 dark:text-slate-400" />
                   </button>
                 </div>
 
                 {/* User Card */}
                 {user && (
-                  <div className="bg-gradient-to-bl from-[#E8F5E9] to-[#F0FFF4] rounded-2xl p-4 mb-4 border border-[#1B7A3D]/10">
+                  <div className="bg-gradient-to-bl from-[#E8F5E9] dark:from-green-900/20 to-[#F0FFF4] dark:to-green-900/10 rounded-2xl p-4 mb-4 border border-[#1B7A3D]/10 dark:border-green-900/20">
                     <div className="flex items-center gap-3">
                       <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#1B7A3D] to-[#22A24D] flex items-center justify-center shadow-sm">
                         <span className="text-white font-black text-base">{(userName || "م")[0].toUpperCase()}</span>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-bold text-gray-900 truncate">{userName || "مستخدم"}</p>
-                        <p className="text-[10px] text-gray-400 truncate" dir="ltr">{user.email}</p>
+                        <p className="text-sm font-bold text-gray-900 dark:text-white truncate">{userName || (isRTL ? "مستخدم" : "User")}</p>
+                        <p className="text-[10px] text-gray-400 dark:text-slate-500 truncate" dir="ltr">{user.email}</p>
                       </div>
                     </div>
-                    {isAdmin && <span className="inline-block mt-2 bg-[#1B7A3D] text-white text-[9px] font-bold px-2 py-0.5 rounded-full">أدمن</span>}
-                    {userRole === "network_manager" && <span className="inline-block mt-2 bg-orange-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">مشرف شبكة</span>}
+                    {isAdmin && <span className="inline-block mt-2 bg-[#1B7A3D] text-white text-[9px] font-bold px-2 py-0.5 rounded-full">{t("common.admin")}</span>}
+                    {userRole === "network_manager" && <span className="inline-block mt-2 bg-orange-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">{t("common.networkManager")}</span>}
                   </div>
                 )}
 
                 {/* Not logged in prompt */}
                 {!user && (
-                  <div className="bg-gray-50 rounded-2xl p-4 mb-4 text-center">
-                    <p className="text-sm text-gray-500 mb-3">سجل الدخول للوصول لكل المزايا</p>
+                  <div className="bg-gray-50 dark:bg-slate-800 rounded-2xl p-4 mb-4 text-center">
+                    <p className="text-sm text-gray-500 dark:text-slate-400 mb-3">{t("auth.loginPrompt")}</p>
                     <Button
                       onClick={() => { setShowMenu(false); setShowAuth(true); }}
                       className="w-full bg-gradient-to-l from-[#1B7A3D] to-[#22A24D] text-white font-bold rounded-xl h-10 text-sm btn-green-shadow"
                     >
-                      <LogIn className="w-4 h-4 ml-1.5" />تسجيل الدخول
+                      <LogIn className="w-4 h-4 ml-1.5" />{t("auth.login")}
                     </Button>
                   </div>
                 )}
@@ -503,28 +503,28 @@ export default function AppleNetApp() {
                 {/* Navigation */}
                 <nav className="space-y-0.5">
                   {[
-                    { icon: Home, label: "الرئيسية", action: () => { setActiveTab("home"); setShowMenu(false); } },
-                    { icon: Wifi, label: "شراء كروت", action: () => { setActiveTab("cards"); setShowMenu(false); } },
-                    { icon: Wifi, label: "تقديم شبكة", action: () => { setActiveTab("submit-network"); setShowMenu(false); } },
-                    { icon: Satellite, label: "Starlink", action: () => { setActiveTab("starlink"); setShowMenu(false); } },
-                    { icon: Wallet, label: "إيداع رصيد", action: () => { setActiveTab("deposit"); setShowMenu(false); } },
-                    { icon: CreditCard, label: "رصيدي", action: () => { setActiveTab("credit"); setShowMenu(false); } },
-                    { icon: ShoppingBag, label: "مشترياتي", action: () => { setActiveTab("purchased"); setShowMenu(false); } },
-                    ...(user ? [{ icon: User, label: "الملف الشخصي", action: () => { setActiveTab("profile"); setShowMenu(false); } }] : []),
-                    { icon: MoreHorizontal, label: "المزيد", action: () => { setActiveTab("more"); setShowMenu(false); } },
-                    ...(isAdmin || userRole === "network_manager" ? [{ icon: Settings, label: "لوحة التحكم", action: () => { setShowAdmin(true); setShowMenu(false); } }] : []),
+                    { icon: Home, label: t("menu.home"), tab: "home", action: () => { setActiveTab("home"); setShowMenu(false); } },
+                    { icon: Wifi, label: t("menu.buyCards"), tab: "cards", action: () => { setActiveTab("cards"); setShowMenu(false); } },
+                    { icon: Globe, label: t("menu.submitNetwork"), tab: "submit-network", action: () => { setActiveTab("submit-network"); setShowMenu(false); } },
+                    { icon: Satellite, label: t("menu.starlink"), tab: "starlink", action: () => { setActiveTab("starlink"); setShowMenu(false); } },
+                    { icon: Wallet, label: t("menu.deposit"), tab: "deposit", action: () => { setActiveTab("deposit"); setShowMenu(false); } },
+                    { icon: CreditCard, label: t("menu.myBalance"), tab: "credit", action: () => { setActiveTab("credit"); setShowMenu(false); } },
+                    { icon: ShoppingBag, label: t("menu.myPurchases"), tab: "purchased", action: () => { setActiveTab("purchased"); setShowMenu(false); } },
+                    ...(user ? [{ icon: User, label: t("menu.profile"), tab: "profile", action: () => { setActiveTab("profile"); setShowMenu(false); } }] : []),
+                    { icon: MoreHorizontal, label: t("menu.more"), tab: "more", action: () => { setActiveTab("more"); setShowMenu(false); } },
+                    ...(isAdmin || userRole === "network_manager" ? [{ icon: Settings, label: t("menu.dashboard"), tab: "admin", action: () => { setShowAdmin(true); setShowMenu(false); } }] : []),
                   ].map((item, i) => (
                     <motion.button
                       key={i}
                       whileTap={{ scale: 0.97 }}
                       onClick={item.action}
                       className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors haptic-press ${
-                        activeTab === item.label
-                          ? "bg-[#E8F5E9] text-[#1B7A3D]"
-                          : "text-gray-600 hover:bg-gray-50"
+                        activeTab === item.tab
+                          ? "bg-[#E8F5E9] dark:bg-green-900/25 text-[#1B7A3D]"
+                          : "text-gray-600 dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-slate-800"
                       }`}
                     >
-                      <item.icon className="w-5 h-5" />
+                      <item.icon className="w-5 h-5 flex-shrink-0" />
                       <span className="text-sm font-semibold">{item.label}</span>
                     </motion.button>
                   ))}
@@ -533,9 +533,15 @@ export default function AppleNetApp() {
 
               {/* Menu Footer */}
               <div className="absolute bottom-6 right-5 left-5">
-                <div className="flex items-center gap-2 opacity-40">
-                  <AppleNetLogo size="sm" />
-                  <span className="text-[10px] text-gray-400">v{APP_VERSION}</span>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 opacity-40">
+                    <AppleNetLogo size="sm" />
+                    <span className="text-[10px] text-gray-400 dark:text-slate-500">v{APP_VERSION}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <ThemeToggle />
+                    <LanguageToggle />
+                  </div>
                 </div>
               </div>
             </motion.div>

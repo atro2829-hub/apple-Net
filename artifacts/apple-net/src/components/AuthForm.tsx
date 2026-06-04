@@ -15,6 +15,7 @@ import { toast } from "sonner";
 import { AppleNetLogo } from "./AppleNetLogo";
 import { sanitizeInput, isValidEmail, isValidYemenPhone } from "@/lib/utils";
 import { PROVINCES, getDistricts } from "@/lib/constants";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface AuthFormProps {
   mode: "login" | "register";
@@ -57,6 +58,8 @@ const FEATURES = [
 ];
 
 export function AuthForm({ mode, onSuccess, onSwitchMode, onBack }: AuthFormProps) {
+  const { t, isRTL } = useLanguage();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -123,7 +126,7 @@ export function AuthForm({ mode, onSuccess, onSwitchMode, onBack }: AuthFormProp
   // ─── Password Reset Confirmation Screen ──────────────────
   if (resetMode && resetSent) {
     return (
-      <div className="min-h-screen bg-white flex flex-col" dir="rtl">
+      <div className="min-h-screen bg-white dark:bg-slate-900 flex flex-col" dir={isRTL ? "rtl" : "ltr"}>
         {/* Header */}
         <div className="flex-shrink-0 px-4 py-3 flex items-center gap-3">
           <button
@@ -178,7 +181,7 @@ export function AuthForm({ mode, onSuccess, onSwitchMode, onBack }: AuthFormProp
   // ─── Password Reset Request Screen ───────────────────────
   if (resetMode) {
     return (
-      <div className="min-h-screen bg-white flex flex-col" dir="rtl">
+      <div className="min-h-screen bg-white dark:bg-slate-900 flex flex-col" dir={isRTL ? "rtl" : "ltr"}>
         {/* Header */}
         <div className="flex-shrink-0 px-4 py-3 flex items-center gap-3">
           <button
@@ -247,7 +250,7 @@ export function AuthForm({ mode, onSuccess, onSwitchMode, onBack }: AuthFormProp
 
   // ─── Main Login / Register Full-Page Screen ──────────────
   return (
-    <div className="min-h-screen bg-white flex flex-col" dir="rtl">
+    <div className="min-h-screen bg-white dark:bg-slate-900 flex flex-col" dir={isRTL ? "rtl" : "ltr"}>
       {/* ===== Top Header ===== */}
       <div className="flex-shrink-0 px-4 py-3 flex items-center justify-between">
         <button
