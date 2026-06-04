@@ -1,0 +1,26 @@
+kind = "web"
+previewPath = "/"
+title = "Apple Net"
+version = "1.0.0"
+id = "artifacts/apple-net"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = ["/", "/api"]
+localPort = 23304
+
+[services.development]
+run = "pnpm --filter @workspace/apple-net run dev"
+
+[services.production]
+build = ["pnpm", "--filter", "@workspace/apple-net", "run", "build"]
+publicDir = "artifacts/apple-net/.next"
+serve = "static"
+
+[services.env]
+PORT = "23304"
