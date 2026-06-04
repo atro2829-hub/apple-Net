@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/context/ThemeProvider";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,7 +23,7 @@ export const viewport: Viewport = {
   viewportFit: "cover",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#1B7A3D" },
-    { media: "(prefers-color-scheme: dark)", color: "#1B7A3D" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f172a" },
   ],
 };
 
@@ -109,22 +111,22 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-gray-900`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100 transition-colors duration-200`}
       >
-        {children}
-        <Toaster
-          position="top-center"
-          toastOptions={{
-            style: {
-              background: "#ffffff",
-              border: "1px solid #E8F5E9",
-              color: "#1a1a1a",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-              borderRadius: "16px",
-              fontSize: "13px",
-            },
-          }}
-        />
+        <ThemeProvider>
+          <LanguageProvider>
+            {children}
+            <Toaster
+              position="top-center"
+              toastOptions={{
+                style: {
+                  borderRadius: "16px",
+                  fontSize: "13px",
+                },
+              }}
+            />
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

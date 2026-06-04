@@ -1,0 +1,1 @@
+- [Apple.NET stack](apple-net-stack.md) — Next.js 15 PWA on port 23304, Firebase hardcoded config, SQLite+Prisma, Tailwind v4, dark mode via next-themes `class` strategy

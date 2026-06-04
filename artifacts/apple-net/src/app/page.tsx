@@ -55,20 +55,26 @@ import { NetworkSubmissionPage } from "@/components/NetworkSubmissionPage";
 import { OnboardingFlow } from "@/components/OnboardingFlow";
 import { AppUpdateBanner } from "@/components/AppUpdateBanner";
 import { ProfilePage } from "@/components/ProfilePage";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { LanguageToggle } from "@/components/LanguageToggle";
+import { PermissionModal } from "@/components/PermissionModal";
 import { iOSSpring } from "@/lib/constants";
 import { initNotifications } from "@/lib/notifications";
+import { useLanguage } from "@/context/LanguageContext";
 
 const APP_VERSION = "2.1.0";
 
-const NAV_TABS = [
-  { id: "home", icon: Home, label: "الرئيسية" },
-  { id: "cards", icon: Wifi, label: "الكروت" },
-  { id: "starlink", icon: Satellite, label: "Starlink" },
-  { id: "credit", icon: Wallet, label: "رصيدي" },
-  { id: "more", icon: MoreHorizontal, label: "المزيد" },
-];
-
 export default function AppleNetApp() {
+  const { t, isRTL, lang } = useLanguage();
+
+  const NAV_TABS = [
+    { id: "home", icon: Home, label: t("nav.home") },
+    { id: "cards", icon: Wifi, label: t("nav.cards") },
+    { id: "starlink", icon: Satellite, label: "Starlink" },
+    { id: "credit", icon: Wallet, label: t("nav.credit") },
+    { id: "more", icon: MoreHorizontal, label: t("nav.more") },
+  ];
+
   const [user, setUser] = useState<User | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [userRole, setUserRole] = useState<string>("user");
@@ -205,8 +211,8 @@ export default function AppleNetApp() {
         initial={{ opacity: 1 }}
         animate={{ opacity: splashExiting ? 0 : 1 }}
         transition={{ duration: 0.5, ease: "easeInOut" }}
-        className="fixed inset-0 bg-white flex flex-col items-center justify-center" 
-        dir="rtl"
+        className="fixed inset-0 bg-white dark:bg-slate-900 flex flex-col items-center justify-center" 
+        dir={isRTL ? "rtl" : "ltr"}
       >
         <motion.div
           initial={{ scale: 0.5, opacity: 0 }}
@@ -228,7 +234,7 @@ export default function AppleNetApp() {
             className="mt-6 flex items-center gap-2"
           >
             <div className="w-5 h-5 border-2 border-[#1B7A3D]/30 border-t-[#1B7A3D] rounded-full animate-spin" />
-            <span className="text-sm text-gray-400 font-bold">جاري التحميل...</span>
+            <span className="text-sm text-gray-400 dark:text-slate-500 font-bold">{t("splash.loading")}</span>
           </motion.div>
         </motion.div>
 
@@ -264,7 +270,7 @@ export default function AppleNetApp() {
   }
 
   return (
-    <div id="app-shell" className="font-sans bg-gray-50" dir="rtl">
+    <div id="app-shell" className="font-sans bg-gray-50 dark:bg-slate-900" dir={isRTL ? "rtl" : "ltr"}>
 
       {/* ===== App Update Banner ===== */}
       <AppUpdateBanner />
@@ -410,13 +416,15 @@ export default function AppleNetApp() {
           <AppleNetLogo size="sm" />
 
           {/* Right Actions */}
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1">
+            <ThemeToggle />
+            <LanguageToggle />
             {user && <NotificationCenter uid={user.uid} isAdmin={isAdmin} />}
             {user ? (
               <motion.button
                 whileTap={{ scale: 0.85 }}
-                onClick={async () => { await signOut(auth); toast.success("تم تسجيل الخروج"); }}
-                className="w-10 h-10 rounded-2xl bg-red-50 flex items-center justify-center hover:bg-red-100 transition-colors haptic-press"
+                onClick={async () => { await signOut(auth); toast.success(isRTL ? "تم تسجيل الخروج" : "Signed out"); }}
+                className="w-10 h-10 rounded-2xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors haptic-press"
               >
                 <LogOut className="w-4 h-4 text-red-500" />
               </motion.button>
@@ -424,7 +432,7 @@ export default function AppleNetApp() {
               <motion.button
                 whileTap={{ scale: 0.85 }}
                 onClick={() => setShowAuth(true)}
-                className="w-10 h-10 rounded-2xl bg-[#E8F5E9] flex items-center justify-center hover:bg-green-100 transition-colors haptic-press"
+                className="w-10 h-10 rounded-2xl bg-[#E8F5E9] dark:bg-green-900/30 flex items-center justify-center hover:bg-green-100 dark:hover:bg-green-900/40 transition-colors haptic-press"
               >
                 <LogIn className="w-4 h-4 text-[#1B7A3D]" />
               </motion.button>
@@ -639,6 +647,9 @@ export default function AppleNetApp() {
           <Crown className="w-5 h-5 text-white" />
         </motion.button>
       )}
+
+      {/* ===== PERMISSION MODAL ===== */}
+      <PermissionModal />
     </div>
   );
 }

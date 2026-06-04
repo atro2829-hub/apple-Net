@@ -501,3 +501,182 @@ textarea:focus-visible {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ====================================================
+   DARK THEME — All Pages & Components
+   ==================================================== */
+
+.dark {
+  color-scheme: dark;
+
+  /* shadcn/ui dark tokens */
+  --background: oklch(0.13 0 0);
+  --foreground: oklch(0.97 0 0);
+  --card: oklch(0.18 0 0);
+  --card-foreground: oklch(0.97 0 0);
+  --popover: oklch(0.18 0 0);
+  --popover-foreground: oklch(0.97 0 0);
+  --primary: oklch(0.52 0.14 155);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.25 0 0);
+  --secondary-foreground: oklch(0.97 0 0);
+  --muted: oklch(0.25 0 0);
+  --muted-foreground: oklch(0.65 0 0);
+  --accent: oklch(0.25 0 0);
+  --accent-foreground: oklch(0.97 0 0);
+  --destructive: oklch(0.65 0.22 22);
+  --border: oklch(0.28 0 0);
+  --input: oklch(0.28 0 0);
+  --ring: oklch(0.52 0.14 155);
+  --chart-1: oklch(0.52 0.14 155);
+  --chart-2: oklch(0.6 0.12 185);
+  --chart-3: oklch(0.5 0.1 230);
+  --chart-4: oklch(0.8 0.18 85);
+  --chart-5: oklch(0.75 0.19 70);
+  --sidebar: oklch(0.18 0 0);
+  --sidebar-foreground: oklch(0.97 0 0);
+  --sidebar-primary: oklch(0.52 0.14 155);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.25 0 0);
+  --sidebar-accent-foreground: oklch(0.97 0 0);
+  --sidebar-border: oklch(0.28 0 0);
+  --sidebar-ring: oklch(0.52 0.14 155);
+
+  /* Apple.NET dark brand overrides */
+  --apple-light-green: rgba(27, 122, 61, 0.18);
+}
+
+/* ── Base Layer ─────────────────────────────────────── */
+.dark body,
+.dark #app-shell {
+  background-color: #0f172a;
+  color: #f1f5f9;
+}
+
+/* ── Backgrounds ────────────────────────────────────── */
+.dark .bg-white          { background-color: #1e293b !important; }
+.dark .bg-gray-50        { background-color: #0f172a !important; }
+.dark .bg-gray-100       { background-color: #1e293b !important; }
+.dark .bg-gray-200       { background-color: #334155 !important; }
+.dark .bg-\[\#E8F5E9\]  { background-color: rgba(27,122,61,0.18) !important; }
+.dark .bg-\[\#F0FFF4\]  { background-color: rgba(27,122,61,0.12) !important; }
+.dark .from-\[\#E8F5E9\] { --tw-gradient-from: rgba(27,122,61,0.18) !important; }
+.dark .to-\[\#F0FFF4\]  { --tw-gradient-to: rgba(27,122,61,0.12) !important; }
+
+/* Cards / elevated surfaces */
+.dark .rounded-2xl.bg-white,
+.dark .rounded-3xl.bg-white,
+.dark .rounded-xl.bg-white {
+  background-color: #1e293b !important;
+}
+
+/* ── Text Colors ────────────────────────────────────── */
+.dark .text-gray-900  { color: #f1f5f9 !important; }
+.dark .text-gray-800  { color: #e2e8f0 !important; }
+.dark .text-gray-700  { color: #cbd5e1 !important; }
+.dark .text-gray-600  { color: #94a3b8 !important; }
+.dark .text-gray-500  { color: #64748b !important; }
+.dark .text-gray-400  { color: #475569 !important; }
+.dark .text-gray-300  { color: #334155 !important; }
+.dark .text-gray-200  { color: #1e293b !important; }
+.dark .text-\[\#1a1a1a\] { color: #f1f5f9 !important; }
+.dark .text-black     { color: #f1f5f9 !important; }
+
+/* ── Borders ────────────────────────────────────────── */
+.dark .border-gray-50   { border-color: #0f172a !important; }
+.dark .border-gray-100  { border-color: #1e293b !important; }
+.dark .border-gray-100\/50 { border-color: rgba(30,41,59,0.5) !important; }
+.dark .border-gray-200  { border-color: #334155 !important; }
+.dark .border-gray-300  { border-color: #475569 !important; }
+.dark .border-\[\#E8F5E9\] { border-color: rgba(27,122,61,0.25) !important; }
+.dark .border-\[\#1B7A3D\]\/10 { border-color: rgba(27,122,61,0.25) !important; }
+
+/* ── Shadows ────────────────────────────────────────── */
+.dark .shadow-sm   { box-shadow: 0 1px 3px rgba(0,0,0,0.6) !important; }
+.dark .shadow-md   { box-shadow: 0 4px 6px rgba(0,0,0,0.6) !important; }
+.dark .shadow-lg   { box-shadow: 0 10px 15px rgba(0,0,0,0.6) !important; }
+.dark .shadow-xl   { box-shadow: 0 20px 25px rgba(0,0,0,0.6) !important; }
+.dark .shadow-2xl  { box-shadow: 0 25px 50px rgba(0,0,0,0.7) !important; }
+.dark .card-shadow { box-shadow: 0 2px 8px rgba(0,0,0,0.5) !important; }
+.dark .card-shadow-lg { box-shadow: 0 4px 16px rgba(0,0,0,0.6) !important; }
+
+/* ── App Shell ──────────────────────────────────────── */
+.dark .app-header {
+  background: rgba(15,23,42,0.92) !important;
+  border-color: rgba(51,65,85,0.5) !important;
+}
+.dark .app-bottom-nav {
+  background: rgba(15,23,42,0.92) !important;
+  border-color: rgba(51,65,85,0.5) !important;
+}
+
+/* ── Splash Screen ──────────────────────────────────── */
+.dark .splash-bg { background-color: #0f172a; }
+
+/* ── Side Menu ──────────────────────────────────────── */
+.dark .fixed.bg-white.z-\[101\] { background-color: #1e293b !important; }
+
+/* ── Form Inputs ────────────────────────────────────── */
+.dark input,
+.dark textarea,
+.dark select {
+  background-color: #334155 !important;
+  border-color: #475569 !important;
+  color: #f1f5f9 !important;
+}
+.dark input::placeholder,
+.dark textarea::placeholder { color: #64748b !important; }
+
+/* ── Glassmorphism ──────────────────────────────────── */
+.dark .glass {
+  background: rgba(30,41,59,0.75) !important;
+  border-color: rgba(27,122,61,0.15) !important;
+}
+
+/* ── Toaster ────────────────────────────────────────── */
+.dark [data-sonner-toast] {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+  color: #f1f5f9 !important;
+}
+
+/* ── Drag handle ────────────────────────────────────── */
+.dark .drag-handle { background: #334155 !important; }
+
+/* ── Status indicators ──────────────────────────────── */
+.dark .bg-red-50   { background-color: rgba(239,68,68,0.12) !important; }
+.dark .bg-blue-50  { background-color: rgba(59,130,246,0.12) !important; }
+.dark .bg-amber-50 { background-color: rgba(245,158,11,0.12) !important; }
+.dark .bg-orange-50 { background-color: rgba(249,115,22,0.12) !important; }
+.dark .bg-purple-50 { background-color: rgba(168,85,247,0.12) !important; }
+
+.dark .text-red-500   { color: #f87171 !important; }
+.dark .text-blue-500  { color: #60a5fa !important; }
+.dark .text-amber-500 { color: #fbbf24 !important; }
+.dark .text-orange-500 { color: #fb923c !important; }
+.dark .text-purple-500 { color: #c084fc !important; }
+.dark .text-red-400   { color: #f87171 !important; }
+
+/* ── Overlay / modal backdrops ──────────────────────── */
+.dark .bg-black\/40  { background-color: rgba(0,0,0,0.65) !important; }
+.dark .bg-black\/50  { background-color: rgba(0,0,0,0.75) !important; }
+
+/* ── Green gradient buttons (keep as-is) ────────────── */
+.dark .bg-gradient-to-l.from-\[\#1B7A3D\] { opacity: 1; }
+.dark .btn-green-shadow {
+  box-shadow: 0 2px 12px rgba(27,122,61,0.4) !important;
+}
+
+/* ── Progress / loading bars ────────────────────────── */
+.dark .bg-gray-100.rounded-full { background-color: #334155 !important; }
+
+/* ── NotificationCenter ─────────────────────────────── */
+.dark [data-notification-panel] { background-color: #1e293b !important; }
+
+/* ── Admin float button overlay ─────────────────────── */
+.dark .fixed.bottom-24.left-4.bg-\[\#1B7A3D\] { box-shadow: 0 4px 12px rgba(27,122,61,0.5) !important; }
+
+/* ── LTR / English layout adjustments ───────────────── */
+html[dir="ltr"] .app-header { direction: ltr; }
+html[dir="ltr"] .app-bottom-nav { direction: ltr; }
+html[dir="ltr"] nav .flex.items-center.justify-around { direction: ltr; }
